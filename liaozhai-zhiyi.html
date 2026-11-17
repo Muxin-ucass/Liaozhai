@@ -352,15 +352,30 @@
     .context-item b { display: block; margin-bottom: 6px; color: var(--accent2-bright); font-size: 18px; }
     .context-item span { color: var(--muted); font-size: 14px; }
 
-    .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-    .category-card { position: relative; min-height: 250px; padding: 32px 34px; overflow: hidden; background: var(--bg2); border: 1px solid var(--rule); transition: transform 180ms ease, border-color 180ms ease; }
-    .category-card:hover { transform: translateY(-4px); border-color: var(--accent2); }
-    .category-char { position: absolute; right: 18px; top: -22px; color: var(--soft-ink); font-size: 138px; line-height: 1; }
-    .category-no { color: var(--accent); font-size: 12px; }
-    .category-card h3 { position: relative; margin: 14px 0 12px; }
-    .category-card p { position: relative; color: var(--muted); font-size: 15px; }
-    .story-tags { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-    .story-tags span { padding: 4px 10px; color: var(--accent2-bright); border: 1px solid var(--rule); font-size: 13px; background: var(--soft-jade); }
+    .content-thesis { padding: 32px 36px; background: linear-gradient(135deg, var(--soft-accent), transparent 62%); border: 1px solid var(--rule); border-left: 3px solid var(--accent); }
+    .thesis-label { color: var(--accent); font-size: 12px; letter-spacing: 0.22em; }
+    .thesis-text { max-width: 88ch; margin-top: 12px; font-size: 19px; line-height: 1.85; }
+    .thesis-text b { color: var(--accent2-bright); }
+    .thesis-note { max-width: 88ch; margin-top: 12px; color: var(--faint); font-size: 13.5px; }
+
+    .content-layers { display: grid; gap: 16px; margin-top: 22px; }
+    .content-layer { display: grid; grid-template-columns: 118px minmax(0, 1fr); gap: 28px; padding: 30px 34px; background: var(--bg2); border: 1px solid var(--rule); transition: transform 180ms ease, border-color 180ms ease; }
+    .content-layer:hover { transform: translateX(4px); border-color: var(--accent2); }
+    .layer-mark { display: grid; align-content: start; gap: 6px; }
+    .layer-no { color: var(--accent); font-size: 12px; letter-spacing: 0.18em; }
+    .layer-char { color: var(--soft-ink); font-size: 64px; line-height: 1; }
+    .layer-body h3 { margin-bottom: 10px; font-size: 21px; }
+    .layer-claim { color: var(--accent2-bright); font-size: 15.5px; }
+    .layer-arg { margin-top: 8px; color: var(--muted); font-size: 15px; }
+    .layer-proof { display: grid; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .layer-proof li { position: relative; padding-left: 16px; color: var(--muted); font-size: 14.5px; }
+    .layer-proof li::before { content: ''; position: absolute; left: 0; top: 11px; width: 7px; height: 1px; background: var(--accent); }
+    .layer-proof b { color: var(--ink); }
+    .layer-take { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); color: var(--gold); font-size: 14px; }
+    .content-conclusion { margin-top: 20px; padding: 26px 32px; background: var(--bg-deep); border: 1px solid var(--rule); }
+    .content-conclusion h3 { margin-bottom: 10px; font-size: 18px; color: var(--accent2-bright); }
+    .content-conclusion p { color: var(--muted); font-size: 15px; }
+    .content-conclusion p + p { margin-top: 8px; color: var(--faint); font-size: 13.5px; }
     .classification-note { margin-top: 20px; color: var(--faint); font-size: 13px; }
 
     .stories-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 28px; align-items: start; }
@@ -726,8 +741,12 @@
       .thesis-band blockquote { font-size: 20px; }
       .author-card { padding: 28px 24px; }
       .timeline li { grid-template-columns: 1fr; gap: 6px; padding-left: 20px; }
-      .context-strip, .category-grid, .technique-grid, .theme-grid, .legacy-grid { grid-template-columns: 1fr; }
-      .category-card { min-height: 0; padding: 28px 24px; }
+      .context-strip, .technique-grid, .theme-grid, .legacy-grid { grid-template-columns: 1fr; }
+      .content-thesis { padding: 26px 22px; }
+      .thesis-text { font-size: 17px; }
+      .content-layer { grid-template-columns: 1fr; gap: 12px; padding: 26px 22px; }
+      .layer-char { font-size: 44px; }
+      .content-conclusion { padding: 24px 22px; }
       .story-tabs { display: flex; overflow-x: auto; padding-bottom: 6px; }
       .story-tab { flex: 0 0 126px; }
       .story-panel { padding: 28px 22px; box-shadow: 7px 7px 0 var(--accent-deep); }
@@ -776,7 +795,7 @@
       .story-panel { min-height: 0; margin-bottom: 18px; break-inside: avoid; box-shadow: none; border: 1px solid var(--rule); }
       .speaker-note { display: none !important; }
       .motion-ready .reveal { opacity: 1; transform: none; }
-      .category-card, .technique, .theme-card, .legacy-card, .discussion { break-inside: avoid; }
+      .content-thesis, .content-layer, .content-conclusion, .technique, .theme-card, .legacy-card, .discussion { break-inside: avoid; }
       .cite a { color: #333; }
       footer { padding: 24px 0; }
     }
@@ -985,19 +1004,71 @@
       </div>
     </section>
 
-    <section class="chapter" id="categories" data-title="内容" data-sub="题材分类与故事类型">
+    <section class="chapter" id="categories" data-title="内容" data-sub="全书只追问一个问题">
       <div class="container">
         <header class="section-head reveal">
           <span class="section-index mono">03</span>
-          <div><p class="section-kicker">观卷 · 内容地图 <span class="ev ev-c">课堂归纳</span></p><h2>四扇门，进入聊斋世界</h2><p class="section-deck">原书并无这四种目录分类；这是为课堂讨论所作的归纳，篇目则逐一注明。</p></div>
+          <div><p class="section-kicker">观卷 · 内容地图</p><h2>近五百篇，只追问一件事</h2><p class="section-deck">题材看似庞杂：爱情、官场、科场、寓言。并排放好就会发现，全书反复在问同一个问题——在一个由礼法、权力和功名共同挤压的世界里，人还能不能活得像个人。</p></div>
         </header>
-        <div class="category-grid">
-          <article class="category-card reveal"><span class="category-char" aria-hidden="true">情</span><span class="category-no mono">TYPE 01</span><h3>花妖狐魅 · 情与礼</h3><p>人与异类相恋、相知，常越过人鬼、人妖与门第的界限；异类被赋予真挚感情，也显出礼法秩序对个体的约束<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup><span class="ev ev-c">释</span>。</p><div class="story-tags"><span>《聂小倩》</span><span>《婴宁》</span><span>《连城》</span></div></article>
-          <article class="category-card reveal"><span class="category-char" aria-hidden="true">刺</span><span class="category-no mono">TYPE 02</span><h3>幽冥人间 · 官场批判</h3><p>从县衙到冥府，权力结构彼此映照；小民受盘剥、含冤难雪，作品以夸张与幻想揭露贪暴与不公<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup><span class="ev ev-c">释</span>。</p><div class="story-tags"><span>《促织》</span><span>《席方平》</span><span>《梦狼》</span></div></article>
-          <article class="category-card reveal"><span class="category-char" aria-hidden="true">士</span><span class="category-no mono">TYPE 03</span><h3>科场浮沉 · 士人命运</h3><p>怀才不遇、评判颠倒、功名迷心，是作者反复书写的主题；个人体验被转化为对人才标准与科举风气的追问<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1</a><span class="cite-comma">,</span><a href="#src-2" title="蒲松龄《聊斋自志》">2]</a></sup><span class="ev ev-c">释</span>。</p><div class="story-tags"><span>《叶生》</span><span>《司文郎》</span><span>《王子安》</span></div></article>
-          <article class="category-card reveal"><span class="category-char" aria-hidden="true">奇</span><span class="category-no mono">TYPE 04</span><h3>奇闻寓言 · 世态人心</h3><p>术法、精怪与日常欲望碰撞，构成短小犀利的寓言；既讽刺贪婪虚荣，也保存民间生活的奇趣<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup><span class="ev ev-c">释</span>。</p><div class="story-tags"><span>《画皮》</span><span>《劳山道士》</span><span>《狼》</span></div></article>
+
+        <div class="content-thesis reveal">
+          <p class="thesis-label mono">全书总纲</p>
+          <p class="thesis-text">《聊斋》写鬼狐，用的不是“怪”，而是<b>“比”</b>：让异类来比人，看谁更重情义；让幽冥来比官场，看谁更不讲理；让功名来比才学，看谁更不公道。比完之后，读者看见的不是鬼，是人。</p>
+          <p class="thesis-note">原书并无这样的目录，也没有“三类”“四类”的分法。下面三层是本页为课堂讨论所作的归纳；每一层都落到具体篇目，可以逐条核对<span class="ev ev-c">释</span>。</p>
         </div>
-        <p class="classification-note reveal">标注说明：以上分类与概括为本页的课堂归纳<span class="ev ev-c">释</span>；所列篇名均见于《聊斋志异》原书<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。同一篇往往兼具多重主题，不宜机械归档。</p>
+
+        <div class="content-layers">
+          <article class="content-layer reveal">
+            <div class="layer-mark"><span class="layer-no mono">第一层</span><span class="layer-char" aria-hidden="true">情</span></div>
+            <div class="layer-body">
+              <h3>情可越界：异类比人更重情义</h3>
+              <p class="layer-claim">写爱情，写的不是艳遇，而是“人有没有资格自己选择情感”。</p>
+              <p class="layer-arg">书中的女子往往比男子更清醒、更有担当。她们或是鬼，或是狐，但作者总是先把她们写成一个“人”，再让她们显出“异”。</p>
+              <ul class="layer-proof">
+                <li><b>《聂小倩》</b>（卷二）：小倩被妖物胁迫，以财色害人；宁采臣“生平无二色”，掷金不受，才换来她的实话与信任。情义的前提是尊重，不是占有<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+                <li><b>《婴宁》</b>（卷二）：爱笑的狐女在婆母责诫后“正色，矢不复笑”，此后再逗也不笑。天性被礼法收编，笑的消失就是代价<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+                <li><b>《连城》</b>：连城与乔生以知己相许，生死相从。它问的是：这份情能否被门第、家庭甚至生死之外的力量承认<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+              </ul>
+              <p class="layer-take">这一层回答：情感属于自己，还是属于礼法。</p>
+            </div>
+          </article>
+
+          <article class="content-layer reveal">
+            <div class="layer-mark"><span class="layer-no mono">第二层</span><span class="layer-char" aria-hidden="true">权</span></div>
+            <div class="layer-body">
+              <h3>权不可恃：幽冥比官场更不讲理</h3>
+              <p class="layer-claim">写幽冥，写的不是死后世界，而是权力失去约束之后的样子。</p>
+              <p class="layer-arg">蒲松龄做过幕僚，熟悉衙门。他把县衙、府厅原样搬进阴间，只是把刑罚加重，把贿赂写得更露骨。</p>
+              <ul class="layer-proof">
+                <li><b>《促织》</b>（卷四）：宫中一只蟋蟀，经“岁征民间”逐级加码，变成“每责一头，辄倾数家之产”；成名之子投井，魂化蟋蟀才补上差事。人不如虫，是这篇最冷的地方<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+                <li><b>《席方平》</b>（卷十）：城隍、郡司、冥王层层受贿；火床、锯解，都用在一个告状的小民身上。阴间照搬阳间官署，等于告诉读者：这里也没有说理的地方<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+                <li><b>《梦狼》</b>：白翁在梦中走进儿子的官署，堂上堂下都是狼，官吏化作虎狼。吃人的不是妖怪，是官署<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+              </ul>
+              <p class="layer-take">这一层回答：权力不受约束时，阴阳两界没有区别。</p>
+            </div>
+          </article>
+
+          <article class="content-layer reveal">
+            <div class="layer-mark"><span class="layer-no mono">第三层</span><span class="layer-char" aria-hidden="true">才</span></div>
+            <div class="layer-body">
+              <h3>才不可弃：功名比才学更不公道</h3>
+              <p class="layer-claim">写科场，写的不是个人考运，而是“谁有资格判定一个人的才学”。</p>
+              <p class="layer-arg">蒲松龄十九岁三试第一，此后屡试不第。他把这段经历拆开，分给许多人物，让他们替自己问同一个问题。</p>
+              <ul class="layer-proof">
+                <li><b>《叶生》</b>：文章冠绝一时，却困于名场；死后魂随知己，教其子成名，自己中举时已经无身可归<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+                <li><b>《司文郎》</b>：盲僧以鼻嗅烧化的文章判断优劣，闻到滥调就咳呕。让“盲”来判“文”，本身就是对主考官的讽刺<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+                <li><b>《王子安》</b>：醉后梦见报喜，醒后才知是狐戏。功名之念，连梦里都不肯放过人<sup class="cite"><a href="#src-1" title="蒲松龄《聊斋志异》">[1]</a></sup>。</li>
+              </ul>
+              <p class="layer-take">这一层回答：一个人的才学，由谁来认定。</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="content-conclusion reveal">
+          <h3>三层其实是一件事</h3>
+          <p>情感被礼法管，命运被权力管，才学被功名管——这三样合起来，就是一个人在世俗社会里的全部处境。所以全书的“异”，从来不是为了逃开人间，而是为了把人间看得更清楚。</p>
+          <p>前面的“四门”是进入方式：情、侠、讽、悟。这一节回答的是进去之后看什么：看情、看权、看才。</p>
+        </div>
       </div>
     </section>
 
